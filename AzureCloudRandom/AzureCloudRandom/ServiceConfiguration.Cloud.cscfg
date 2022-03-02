@@ -1,9 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ServiceConfiguration serviceName="AzureCloudRandom" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="6" osVersion="*" schemaVersion="2015-04.2.6">
   <Role name="WCFServiceWebRole1">
     <Instances count="1" />
     <ConfigurationSettings>
-      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=servicewcfmaemstg;AccountKey=$(_servicewcfmaemstg.key_)" />
     </ConfigurationSettings>
   </Role>
+  <NetworkConfiguration>
+    <VirtualNetworkSite name="servicewcfmaemVNet" />
+    <AddressAssignments>
+      <InstanceAddress roleName="WCFServiceWebRole1">
+        <Subnets>
+          <Subnet name="WebTier" />
+        </Subnets>
+      </InstanceAddress>
+    </AddressAssignments>
+  </NetworkConfiguration>
 </ServiceConfiguration>

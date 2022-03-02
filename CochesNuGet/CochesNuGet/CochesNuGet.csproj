@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <PackageId>CochesNuGet_MA_2022</PackageId>
+    <Authors>Maria Adela Tajamar</Authors>
+    <Company>Tajamar</Company>
+    <Product>Coches NuGet Prueba Clase</Product>
+    <Description>Paquete de pruebas para la clase de NuGet.</Description>
+  </PropertyGroup>
+
+</Project>

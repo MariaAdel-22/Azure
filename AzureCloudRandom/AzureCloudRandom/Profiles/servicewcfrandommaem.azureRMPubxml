@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <AzureCredentials>{"ServiceManagementEndpoint":"https:\/\/management.core.windows.net\/","ResourceManagementEndpoint":"https:\/\/management.azure.com\/","SubscriptionId":"cceeaec1-2f26-4084-bc41-61efc6a2bd07"}</AzureCredentials>
+    <AzureDeploymentLabel>AzureCloudRandom</AzureDeploymentLabel>
+    <AzureEnableRemoteDesktop>False</AzureEnableRemoteDesktop>
+    <AzureServiceConfiguration>Cloud</AzureServiceConfiguration>
+    <AzureSolutionConfiguration>Release</AzureSolutionConfiguration>
+    <AzureAppendTimestampToDeploymentLabel>True</AzureAppendTimestampToDeploymentLabel>
+    <EnableApplicationInsights>False</EnableApplicationInsights>
+    <AzureRMCloudServiceV2Name>servicewcfmaem</AzureRMCloudServiceV2Name>
+    <AzureRMCloudServiceV2ResourceGroupName>recursosjuernes</AzureRMCloudServiceV2ResourceGroupName>
+    <AzureRMCloudServiceV2Location>{"Name":"westeurope","DisplayName":"West Europe"}</AzureRMCloudServiceV2Location>
+    <AzureRMKeyVaultName />
+    <AzureRMKeyVaultResourceGroupName />
+    <AzureRMKeyVaultLocation />
+    <AzureRMStorageAccountName>servicewcfmaemstg</AzureRMStorageAccountName>
+    <AzureRMStorageAccountResourceGroupName>recursosjuernes</AzureRMStorageAccountResourceGroupName>
+    <AzureRMStorageAccountLocation>{"Name":"westeurope","DisplayName":"West Europe"}</AzureRMStorageAccountLocation>
+    <AzureRMSwappableCloudServiceV2Name />
+    <AzureRMSwappableCloudServiceV2ResourceGroupName />
+    <AzureRMSwappableCloudServiceV2Location />
+  </PropertyGroup>
+</Project>
