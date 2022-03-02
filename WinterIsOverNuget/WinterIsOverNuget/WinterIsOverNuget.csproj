@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <PackageId>WinterIsOverNuget_MA_2022</PackageId>
+    <Authors>Maria Adela Tajamar</Authors>
+    <Company>Tajamar</Company>
+    <Product>WinterIsOver Nuget</Product>
+    <Description>Producto que mapea la bbdd de NorthWind mediante un api</Description>
+    <PackageIcon>prueba.jpg</PackageIcon>
+    <PackageIconUrl />
+    <Version>2.0.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\OneDrive - Tajamar\Escritorio\prueba.jpg">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
