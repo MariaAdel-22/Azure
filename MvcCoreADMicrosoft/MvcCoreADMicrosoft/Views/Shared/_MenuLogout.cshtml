@@ -1,0 +1,10 @@
+﻿@inject UserManager<IdentityUser> user;
+@inject SignInManager<IdentityUser> signInManager;
+
+@if (signInManager.IsSignedIn(User)) {
+
+    <form method="post" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index","Home")">
+        <span style="color:blue">@user.GetUserName(User)</span>
+        <button type="submit" class="btn btn-info">Log Out</button>
+    </form>
+}

@@ -1,1 +1,9 @@
-﻿<h1 style="color:blue">Bienvenidoooo</h1>
+﻿@inject UserManager<IdentityUser> user;
+
+<h1 style="color:blue">Bienvenido @user.GetUserName(User) Microsoft!</h1>
+
+<ul class="list-group">
+    @foreach (var claim in User.Claims) { 
+        <li class="list-group-item"> @claim.Value</li>
+    }
+</ul>
