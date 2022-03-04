@@ -1,0 +1,16 @@
+﻿@model List<Chollo>
+
+<h1 style="color:blue">Número de chollos: @ViewData["NUMERO"]</h1>
+
+<ul class="list-group">
+    @foreach (Chollo c in Model) { 
+
+        <li class="list-group-item-info">
+            <h1>ID: @c.IdChollo</h1>
+            <h1>Titulo: @c.Titulo</h1>
+            <h1>Fecha: @c.Fecha</h1>
+            <a href="@c.Link">@c.Link</a>
+            <span>@Html.Raw(c.Descripcion)</span>
+        </li>
+    }
+</ul>

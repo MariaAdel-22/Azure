@@ -20,13 +20,8 @@ namespace MvcWebJobsEjercicio
             //Creamos el repositorio al llamar al servicio con el provider y cargamos/llamamos al método
             RepositoryChollometro repo = provider.GetService<RepositoryChollometro>();
 
-            Console.WriteLine("Pulse en ENTER para iniciar...");
-            Console.ReadLine();
-
             repo.PopulateChollos();
-
-            Console.WriteLine("Proceso terminado");
-            Console.ReadLine();
+            
 
         }
     }
