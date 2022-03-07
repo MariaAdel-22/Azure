@@ -1,0 +1,61 @@
+﻿@section Scripts{ 
+
+<script>
+    $(document).ready(function () {
+
+        $("#botonload").click(function () {
+
+            var url = "https://apipersonas2022maem.azurewebsites.net/api/personas";
+
+            $.ajax({
+                url: url,
+                method: "GET",
+                dataType: "json",
+                success: function (data) {
+
+                    var html = "";
+
+                    $.each(data, function (index, persona) {
+
+                        var id = persona.idPersona;
+                        var nombre = persona.nombre;
+                        var edad = persona.edad;
+
+                        html += "<tr>";
+                        html += "<td>" + id + "</td>";
+                        html += "<td>" + nombre + "</td>";
+                        html += "<td>" + edad + "</td>";
+                        html += "</tr>";
+
+                    });
+
+                    $("#tablapersonas tbody").html(html);
+                }
+            });
+        });
+    });
+</script>
+
+}
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <button id="botonload" class="btn btn-info">Load Personas</button>
+
+    <h1 class="display-4">Cliente Personas Api</h1>
+
+    <table class="table table-dark" id="tablapersonas">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Edad</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>

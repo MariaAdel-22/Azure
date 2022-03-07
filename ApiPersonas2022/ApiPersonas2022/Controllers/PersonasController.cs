@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ApiPersonas2022.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,16 +11,32 @@ namespace ApiPersonas2022.Controllers
     [ApiController]
     public class PersonasController : ControllerBase
     {
+        public List<Persona> personas;
+
+        public PersonasController() {
+
+            this.personas = new List<Persona>
+            {
+                new Persona{ IdPersona = 1, Nombre = "Lucia", Edad = 18},
+                new Persona{ IdPersona = 2, Nombre = "Marcos",Edad=99},
+                new Persona{ IdPersona=3, Nombre="Pedro",Edad=44},
+                new Persona{ IdPersona= 4, Nombre="Carlos",Edad=44}
+            };
+        }
+
         [HttpGet]
-        public ActionResult<string> Get()
+        public ActionResult<List<Persona>> Get()
         {
-            return "Mi primer API";
+            return this.personas;
         }
 
         [HttpGet("{id}")]
-        public ActionResult<string> Get(string id) {
+        public ActionResult<Persona> Get(int id) {
 
-            return "Primer Api Get ID";
+
+            return this.personas.SingleOrDefault(x => x.IdPersona == id);
         }
+
+
     }
 }
