@@ -3,11 +3,36 @@
 }
 
 @section Scripts{ 
-
 <script>
+    $(document).ready(function () {
+        $("#botonload").click(function () {
 
+            var url = "https://apihospitales2022maem.azurewebsites.net/api/hospitales";
+
+            $.ajax({
+                url: url,
+                method: "GET",
+                dataType: "json",
+                success: function (data) {
+
+                    var html = "";
+
+                    $.each(data, function (index,hospital) {
+
+                        html += "<tr>";
+                        html += "<td>" + hospital.idHospital + "</td>";
+                        html += "<td>" + hospital.nombre + "</td>";
+                        html += "<td>" + hospital.direccion + "</td>";
+                        html += "<td>" + hospital.camas + "</td>";
+                        html += "</tr>";
+                    });
+
+                    $("#tabla tbody").html(html);
+                }
+            });
+        });
+    });
 </script>
-
 }
 
 <div class="text-center">

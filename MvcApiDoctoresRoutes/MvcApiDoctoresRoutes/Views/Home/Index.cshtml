@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@section Scripts{ 
+    <script>
+        $(document).ready(function () {
+
+            var url = "https://apidoctoresroutes2022maem.azurewebsites.net/api/doctores";
+
+            $("#btnLoad").click(function () {
+
+                $.ajax({
+
+                    url: url,
+                    dataType: "json",
+                    method: "GET",
+                    success: function (data) {
+
+                        var html = "";
+
+                        $.each(data, function (index, doctor) {
+
+                            html += "<tr>";
+                            html += "<td>" + doctor.hospitalCod + "</td>";
+                            html += "<td>" + doctor.doctorCod + "</td>";
+                            html += "<td>" + doctor.apellido + "</td>";
+                            html += "<td>" + doctor.especialidad + "</td>";
+                            html += "<td>" + doctor.salario + "</td>";
+                        });
+
+                        $("#tabladoctor tbody").html(html);
+                    }
+                });
+
+            });
+            
+        });
+
+    </script>
+}
+
+<div class="text-center">
+    <h1 class="display-4">Api Doctores</h1>
+    <button type="button" id="btnLoad" class="btn btn-info">Cargar Doctores</button>
+
+    <table class="table table-info" id="tabladoctor">
+        <thead>
+            <tr>
+                <th>Id Hospital</th>
+                <th>Id Doctor</th>
+                <th>Apellidos</th>
+                <th>Especialidad</th>
+                <th>Salario</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
