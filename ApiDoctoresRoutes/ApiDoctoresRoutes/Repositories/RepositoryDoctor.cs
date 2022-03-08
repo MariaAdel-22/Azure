@@ -1,5 +1,5 @@
 ﻿using ApiDoctoresRoutes.Data;
-using ApiDoctoresRoutes.Models;
+using NuGetDoctores;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +24,27 @@ namespace ApiDoctoresRoutes.Repositories
         public Doctor GetDoctor(string id) {
 
             return this.context.Doctores.SingleOrDefault(x => x.DoctorCod == id);
+        }
+
+        public List<string> GetEspecialidades() {
+
+            var consulta = (from datos in this.context.Doctores select datos.Especialidad).Distinct();
+            return consulta.ToList();
+        }
+
+        public List<Doctor> GetDoctoresEspecialidades(string especialidad) {
+
+            var consulta = from datos in this.context.Doctores where datos.Especialidad == especialidad select datos;
+            return consulta.ToList();
+        }
+
+        public List<Doctor> GetDoctores(int salario, string especialidad)
+        {
+
+            var consulta = from datos in this.context.Doctores
+            where datos.Salario >= salario && datos.Especialidad == especialidad select datos;
+
+            return consulta.ToList();
         }
     }
 }

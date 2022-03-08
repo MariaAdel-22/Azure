@@ -1,4 +1,4 @@
-﻿using ApiDoctoresRoutes.Models;
+﻿using NuGetDoctores;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

@@ -1,4 +1,4 @@
-﻿using ApiDoctoresRoutes.Models;
+﻿using NuGetDoctores;
 using ApiDoctoresRoutes.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -30,6 +30,30 @@ namespace ApiDoctoresRoutes.Controllers
         public ActionResult<Doctor> GetDoctor(string id) {
 
             return this.repo.GetDoctor(id);
+        }
+
+        //api/doctores/especialidades
+        [HttpGet]
+        [Route("[action]")]//con esto le decimos que tenga el mismo nombre que el del ActionResult
+        public ActionResult<List<string>> Especialidades() {
+
+            return this.repo.GetEspecialidades();
+        }
+
+        //api/doctores/doctoresespecialidad/cardiologia
+        [HttpGet]
+        [Route("[action]/{especialidad}")]
+        public ActionResult<List<Doctor>> DoctoresEspecialidad(string especialidad) {
+
+            return this.repo.GetDoctoresEspecialidades(especialidad);
+        }
+
+        //api/doctores/555/cardiologia
+        [HttpGet]
+        [Route("{salario}/{especialidad}")]
+        public ActionResult<List<Doctor>> DoctoresSalario(int salario,string especialidad) {
+
+            return this.repo.GetDoctores(salario, especialidad);
         }
     }
 }
