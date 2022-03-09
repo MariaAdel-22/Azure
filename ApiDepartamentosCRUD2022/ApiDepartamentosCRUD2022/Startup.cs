@@ -1,16 +1,21 @@
+using ApiDepartamentosCRUD2022.Data;
+using ApiDepartamentosCRUD2022.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MvcApiDoctoresRoutes.Services;
+using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MvcApiDoctoresRoutes
+namespace ApiDepartamentosCRUD2022
 {
     public class Startup
     {
@@ -24,15 +29,15 @@ namespace MvcApiDoctoresRoutes
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string UrlApi = this.Configuration.GetValue<string>("UrlApis:ApiDoctoresRoutes");
+            string cadena = this.Configuration.GetConnectionString("azure");
+            services.AddTransient<RepositoryDepartamento>();
+            services.AddDbContext<DepartamentosContext>(op => op.UseSqlServer(cadena));
 
-            //Declaramos el servicio y le pasamos la URL guardada en appsettings
-            ServiceApiDoctores serviceDoctores = new ServiceApiDoctores(UrlApi);
-
-            //Inyectamos el servicio
-            services.AddTransient<ServiceApiDoctores>(x => serviceDoctores);
-
-            services.AddControllersWithViews();
+            services.AddControllers();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ApiDepartamentosCRUD2022", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,14 +47,15 @@ namespace MvcApiDoctoresRoutes
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => {
+
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "ApiDepartamentosCRUD2022 v1");
+                c.RoutePrefix = "";
+            });
+
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
 
             app.UseRouting();
 
@@ -57,9 +63,7 @@ namespace MvcApiDoctoresRoutes
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllers();
             });
         }
     }
