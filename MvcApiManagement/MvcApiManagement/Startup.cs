@@ -25,9 +25,13 @@ namespace MvcApiManagement
         public void ConfigureServices(IServiceCollection services)
         {
             string cadena = this.Configuration.GetValue<string>("UrlApi:apiHospital");
+            string cadenaDoctor= this.Configuration.GetValue<string>("UrlApi:apiDoctores");
+
+            ServiceApiDoctores serviceDoctores = new ServiceApiDoctores(cadenaDoctor);
 
             ServiceApiHospital serviceApi = new ServiceApiHospital(cadena);
 
+            services.AddTransient<ServiceApiDoctores>(z => serviceDoctores);
             services.AddTransient<ServiceApiHospital>(x => serviceApi);
 
             services.AddControllersWithViews();
