@@ -28,6 +28,20 @@ namespace ApiPeliculas.Controllers
         }
 
         [HttpGet]
+        [Route("[action]")]
+        public ActionResult<List<Genero>> Generos() {
+
+            return this.repo.GetGeneros();
+        }
+
+        [HttpGet]
+        [Route("[action]")]
+        public ActionResult<List<Nacionalidad>> Nacionalidades() {
+
+            return this.repo.GetNacionalidades();
+        }
+
+        [HttpGet]
         [Route("[action]/{id}")]
         public ActionResult<Pelicula> FindPeliculaId(int id) {
 
