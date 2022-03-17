@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>53598dfe-bb92-4291-bed6-c6a6f1032e0a</UserSecretsId>
+    <ApplicationInsightsResourceId>/subscriptions/cceeaec1-2f26-4084-bc41-61efc6a2bd07/resourceGroups/rg-borrarjueves/providers/microsoft.insights/components/donativos</ApplicationInsightsResourceId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.20.0" />
+    <PackageReference Include="Microsoft.ApplicationInsights.TraceListener" Version="2.20.0" />
+    <PackageReference Include="Microsoft.ApplicationInsights.Web" Version="2.20.0" />
+  </ItemGroup>
+
+</Project>

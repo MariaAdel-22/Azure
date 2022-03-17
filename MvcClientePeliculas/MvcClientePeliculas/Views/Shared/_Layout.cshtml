@@ -1,4 +1,21 @@
-﻿<!DOCTYPE html>
+﻿@{
+    //List<Genero> generos = ["GENERO"] as List<Genero>;
+    List<Genero> generos;
+
+    if (Context.Session.GetString("GENERO") != null)
+    {
+
+        generos = JsonConvert.DeserializeObject(Context.Session.GetString("GENERO")) as List<Genero>;
+    }
+    else
+    {
+
+        generos = new List<Genero>();
+    }
+
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -10,38 +27,29 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-            <div class="container-fluid">
+            <ul class="container-fluid">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <li class="collapse navbar-collapse" id="collapsibleNavbar">
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link" href="#">Link</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Generos</a>
-                            <ul class="dropdown-menu">
-                                @{ 
-                                    //List<Genero> generos = ["GENERO"] as List<Genero>;
-                                    List<Genero> generos;
+                        <li class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Generos
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-                                    if (Context.Session.GetString("GENERO") != null)
-                                    {
+                                @foreach (Genero gen in generos)
+                                {
 
-                                        generos = JsonConvert.DeserializeObject(Context.Session.GetString("GENERO")) as List<Genero>;
-                                    }
-                                    else {
+                                    <li><a asp-controller="Coches" asp-action="Details" asp-route-idcoche="@car.IdCoche"
+                                       class="dropdown-item">@gen.Nombre</a></li>
 
-                                        generos = new List<Genero>();
-                                    }
+                                 }
 
-                                }
-                                
-                                @foreach (Genero gen in generos) { 
-                                    
-                                    <li><a class="dropdown-item" href="#">@gen.Nombre</a></li>    
-                                }
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -53,8 +61,8 @@
                             </ul>
                         </li>
                     </ul>
-                </div>
-            </div>
+                   </li>
+            </ul>
         </nav>
     </header>
     <div class="container">
