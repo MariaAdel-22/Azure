@@ -1,0 +1,32 @@
+﻿
+@{
+    //List<Genero> generos = ["GENERO"] as List<Genero>;
+    List<Genero> generos;
+
+    if (Context.Session.GetString("GENEROS") != null)
+    {
+
+        generos = JsonConvert.DeserializeObject(Context.Session.GetString("GENEROS")) as List<Genero>;
+    }
+    else
+    {
+
+        generos = new List<Genero>();
+    }
+
+}
+
+
+<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+    @foreach (Genero gen in generos)
+    {
+
+        <li>
+            <a asp-controller="Coches" asp-action="Details" asp-route-idGenero="@gen.IdGenero"
+               class="dropdown-item">@gen.Nombre</a>
+        </li>
+
+    }
+
+</ul>

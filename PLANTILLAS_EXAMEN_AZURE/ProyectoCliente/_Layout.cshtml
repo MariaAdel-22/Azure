@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MvcClientePeliculas</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <ul class="container-fluid">
+               
+                <li class="collapse navbar-collapse" id="collapsibleNavbar">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                        </li>
+                        <li><a class="nav-link" asp-controller="Peliculas" asp-action="IndexJquery">Consumir API con JQUERY</a></li>
+                        <li class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Generos
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                                @*{
+                                    //List<Genero> generos = ["GENERO"] as List<Genero>;
+                                    List<Genero> generos;
+
+                                    if (Context.Session.GetString("GENEROS") != null)
+                                    {
+
+                                        //object json = JsonConvert.DeserializeObject(Context.Session.GetString("GENEROS")) as List<Genero>;
+
+                                        object json = JsonConvert.DeserializeObject(Context.Session.GetString("GENEROS"));
+
+                                        generos = json as List<Genero>;
+                                    }
+                                    else
+                                    {
+
+                                        generos = new List<Genero>();
+                                    }
+
+                                }
+                                @foreach (Genero gen in generos)
+                                {
+
+                                    <li>
+                                        <a asp-controller="Coches" asp-action="Details" asp-route-idGenero="@gen.IdGenero"
+                                           class="dropdown-item">@gen.Nombre</a>
+                                    </li>
+
+                                }*@
+
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Nacionalidades</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Link</a></li>
+                                <li><a class="dropdown-item" href="#">Another link</a></li>
+                                <li><a class="dropdown-item" href="#">A third link</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2022 - MvcClientePeliculas - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
