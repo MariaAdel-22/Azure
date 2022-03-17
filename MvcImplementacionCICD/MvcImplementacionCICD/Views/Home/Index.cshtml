@@ -1,0 +1,15 @@
+﻿@model List<int>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">@ViewData["SALUDO"]</h1>
+   <ul>
+       @foreach (int num in Model) {
+       
+           <li>@num</li>
+       }
+   </ul>
+</div>
