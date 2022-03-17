@@ -24,6 +24,8 @@ namespace MvcDonativosMetricas.Controllers
 
         public IActionResult Index()
         {
+            this._logger.LogInformation("Estamos en index");
+
             return View();
         }
 
