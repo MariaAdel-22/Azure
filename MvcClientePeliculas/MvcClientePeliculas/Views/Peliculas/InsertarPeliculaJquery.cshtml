@@ -1,0 +1,113 @@
+﻿@section Scripts{ 
+
+<script>
+    var UrlApi = "https://apipeliculas2022maem.azurewebsites.net";
+
+    $(document).ready(function () {
+
+        $("#insertar").click(function () {
+
+            var idPelicula = $("#IdPelicula").val();
+            var IdDistribuidor = $("#IdDistribuidor").val();
+            var IdGenero = $("#IdGenero").val();
+            var Titulo = $("#Titulo").val();
+
+            var IdNacionalidad = $("#IdNacionalidad").val();
+            var Argumento = $("#Argumento").val();
+            var Foto = $("#Foto").val();
+            var FechaEstreno = $("#FechaEstreno").val();
+
+            var Actores = $("#Actores").val();
+            var Duracion = $("#Duracion").val();
+            var Precio = $("#Precio").val();
+
+            var pel = new Object();
+
+            pel.idPelicula = idPelicula;
+            pel.IdDistribuidor = IdDistribuidor;
+            pel.IdGenero = IdGenero;
+
+            pel.Titulo = Titulo;
+            pel.IdNacionalidad = IdNacionalidad;
+            pel.Argumento = Argumento;
+            pel.Foto = Foto;
+            pel.FechaEstreno = FechaEstreno;
+
+            pel.Actores = Actores;
+            pel.Duracion = Duracion;
+            pel.Precio = Precio;
+
+            var json = JSON.stringify(pel);
+
+            var request = "/api/Peliculas";
+
+            $.ajax({
+
+                url: UrlApi + request,
+                method: "POST",
+                data: json,
+                contentType: "application/json",
+                success: function () {
+
+                    window.location = "IndexJquery";
+                }
+            });
+        });
+
+    });
+
+</script>
+
+}
+
+
+<form>
+    <div class="text-danger"></div>
+    <div class="form-group">
+        <label class="control-label">IdPelicula</label>
+        <input id="IdPelicula" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label class="control-label">IdDistribuidor</label>
+        <input id="IdDistribuidor" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label class="control-label">IdGenero</label>
+        <input id="IdGenero" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label class="control-label">Titulo</label>
+        <input id="Titulo" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label class="control-label">IdNacionalidad</label>
+        <input id="IdNacionalidad" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label class="control-label">Argumento</label>
+        <input id="Argumento" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label class="control-label">Foto</label>
+        <input id="Foto" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label class="control-label">FechaEstreno</label>
+        <input id="FechaEstreno" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label class="control-label">Actores</label>
+        <input id="Actores" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label class="control-label">Duracion</label>
+        <input id="Duracion" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label class="control-label">Precio</label>
+        <input id="Precio" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <input type="button" value="Save" class="btn btn-primary" id="insertar" />
+    </div>
+</form>

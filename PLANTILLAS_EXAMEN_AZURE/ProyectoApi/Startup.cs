@@ -1,16 +1,21 @@
+using ApiPeliculas.Data;
+using ApiPeliculas.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MvcClientePeliculas.Services;
+using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MvcClientePeliculas
+namespace ApiPeliculas
 {
     public class Startup
     {
@@ -24,20 +29,17 @@ namespace MvcClientePeliculas
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string cadenaA = this.Configuration.GetValue<string>("UrlAzure:urlA");
 
-            ServiceApiPeliculas service = new ServiceApiPeliculas(cadenaA);
+            string cadena = this.Configuration.GetConnectionString("cadenaAzure");
 
-            services.AddTransient<ServiceApiPeliculas>(x => service);
+            services.AddTransient<RepositoryPeliculas>();
+            services.AddDbContext<PeliculasContext>(x => x.UseSqlServer(cadena));
 
-            services.AddDistributedMemoryCache();
-
-            services.AddSession(option =>
+            services.AddControllers();
+            services.AddSwaggerGen(c =>
             {
-                option.IdleTimeout = TimeSpan.FromMinutes(40);
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ApiPeliculas", Version = "v1" });
             });
-
-            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,25 +48,25 @@ namespace MvcClientePeliculas
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                
             }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => {
+
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "ApiPeliculas v1");
+                c.RoutePrefix = "";
+            });
+
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
 
             app.UseRouting();
 
             app.UseAuthorization();
-            app.UseSession();
+
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Peliculas}/{action=Index}/{id?}");
+                endpoints.MapControllers();
             });
         }
     }

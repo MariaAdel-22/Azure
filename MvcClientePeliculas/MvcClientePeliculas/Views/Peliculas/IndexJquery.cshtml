@@ -1,0 +1,98 @@
+﻿@section Scripts{ 
+
+<script>
+
+    var UrlApi = "https://apipeliculas2022maem.azurewebsites.net";
+
+    $(document).ready(function () {
+
+        CargarTabla();
+
+        $(document).on('click', 'button', function (event) {
+
+            var idBtn = $(this).attr("id");
+            var idPelic = $(this).attr("name");
+
+            if (idBtn == "modificar") {
+
+                window.location = "/Peliculas/ModificarPeliculasJquery?idPel=" + idPelic;
+
+
+            } else if (idBtn == "eliminar") {
+
+                var request = "/api/Peliculas/" + idPelic;
+
+                $.ajax({
+                    url: UrlApi + request,
+                    method: "DELETE",
+                    success: function () {
+
+                        CargarTabla();
+                    }
+                });
+            }
+            
+        });
+    });
+
+    function CargarTabla() {
+
+        var request = "/api/Peliculas";
+
+        $.ajax({
+
+            url: UrlApi + request,
+            method: "GET",
+            success: function (data) {
+
+                var html = "";
+
+                $.each(data, function (index,peliculas) {
+
+                    html += "<tr>";
+
+                    html += "<td>" + peliculas.idPelicula + "</td>";
+                    html += "<td>" + peliculas.idDistribuidor + "</td>";
+                    html += "<td>" + peliculas.idGenero + "</td>";
+                    html += "<td>" + peliculas.titulo + "</td>";
+
+                    html += "<td>" + peliculas.idNacionalidad + "</td>";
+                    html += "<td>" + peliculas.argumento + "</td>";
+                    html += "<td>" + peliculas.foto + "</td>";
+                    html += "<td>" + peliculas.fechaEstreno + "</td>";
+                    html += "<td>" + peliculas.actores + "</td>";
+                    html += "<td>" + peliculas.duracion + "</td>";
+                    html += "<td>" + peliculas.precio + "</td>";
+                    html += "<td><button class='btn btn-info' id='modificar' name='" + peliculas.idPelicula + "'>Modificar</button>"
+                        + "<button class='btn btn-danger' id='eliminar' name='" + peliculas.idPelicula + "'>Eliminar</button></td>";
+                });
+
+                $("#tablapeliculas tbody").html(html);
+            }
+        });
+    }
+</script>
+
+}
+
+
+<a class="btn btn-info" asp-controller="Peliculas" asp-action="InsertarPeliculaJquery">Insertar Pelicula</a>
+<table class="table table-warning" id="tablapeliculas">
+    <thead>
+        <tr>
+            <th>IdPelicula</th>
+            <th>IdDistribuidor</th>
+            <th>IdGenero</th>
+            <th>Titulo</th>
+            <th>IdNacionalidad</th>
+            <th>Argumento</th>
+            <th>Foto</th>
+            <th>FechaEstreno</th>
+            <th>Actores</th>
+            <th>Duracion</th>
+            <th>Precio</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>

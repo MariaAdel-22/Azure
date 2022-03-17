@@ -1,0 +1,80 @@
+﻿@model Pelicula
+
+@{
+    ViewData["Title"] = "modificarPelicula";
+}
+
+<h1>modificarPelicula</h1>
+
+<h4>Pelicula</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="modificarPelicula">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IdPelicula" class="control-label"></label>
+                <input asp-for="IdPelicula" class="form-control" />
+                <span asp-validation-for="IdPelicula" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdDistribuidor" class="control-label"></label>
+                <input asp-for="IdDistribuidor" class="form-control" />
+                <span asp-validation-for="IdDistribuidor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdGenero" class="control-label"></label>
+                <input asp-for="IdGenero" class="form-control" />
+                <span asp-validation-for="IdGenero" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Titulo" class="control-label"></label>
+                <input asp-for="Titulo" class="form-control" />
+                <span asp-validation-for="Titulo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdNacionalidad" class="control-label"></label>
+                <input asp-for="IdNacionalidad" class="form-control" />
+                <span asp-validation-for="IdNacionalidad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Argumento" class="control-label"></label>
+                <input asp-for="Argumento" class="form-control" />
+                <span asp-validation-for="Argumento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Foto" class="control-label"></label>
+                <input asp-for="Foto" class="form-control" />
+                <span asp-validation-for="Foto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaEstreno" class="control-label"></label>
+                <input asp-for="FechaEstreno" class="form-control" />
+                <span asp-validation-for="FechaEstreno" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Actores" class="control-label"></label>
+                <input asp-for="Actores" class="form-control" />
+                <span asp-validation-for="Actores" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Duracion" class="control-label"></label>
+                <input asp-for="Duracion" class="form-control" />
+                <span asp-validation-for="Duracion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Precio" class="control-label"></label>
+                <input asp-for="Precio" class="form-control" />
+                <span asp-validation-for="Precio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

@@ -1,0 +1,130 @@
+﻿@model Pelicula
+
+@{
+    ViewData["Title"] = "ModificarPeliculasJquery";
+}
+
+@section Scripts{ 
+
+<script>
+
+    var UrlApi = "https://apipeliculas2022maem.azurewebsites.net";
+
+    $(document).ready(function () {
+
+        $("#modificar").click(function () {
+
+            var idPelicula = $("#IdPelicula").val();
+            var IdDistribuidor = $("#IdDistribuidor").val();
+            var IdGenero = $("#IdGenero").val();
+            var Titulo = $("#Titulo").val();
+
+            var IdNacionalidad = $("#IdNacionalidad").val();
+            var Argumento = $("#Argumento").val();
+            var Foto = $("#Foto").val();
+            var FechaEstreno = $("#FechaEstreno").val();
+
+            var Actores = $("#Actores").val();
+            var Duracion = $("#Duracion").val();
+            var Precio = $("#Precio").val();
+
+            var pel = new Object();
+
+            pel.idPelicula = idPelicula;
+            pel.IdDistribuidor = IdDistribuidor;
+            pel.IdGenero = IdGenero;
+
+            pel.Titulo = Titulo;
+            pel.IdNacionalidad = IdNacionalidad;
+            pel.Argumento = Argumento;
+            pel.Foto = Foto;
+            pel.FechaEstreno = FechaEstreno;
+
+            pel.Actores = Actores;
+            pel.Duracion = Duracion;
+            pel.Precio = Precio;
+
+            var json = JSON.stringify(pel);
+
+            var request = "/api/Peliculas";
+
+            $.ajax({
+
+                url: UrlApi + request,
+                method: "PUT",
+                data: json,
+                contentType: "application/json",
+                success: function () {
+
+                    window.location = "IndexJquery";
+                }
+            });
+        });
+    });
+</script>
+
+}
+
+<h1>ModificarPeliculasJquery</h1>
+
+<h4>Pelicula</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form>
+            <div class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IdPelicula" class="control-label"></label>
+                <input id="IdPelicula" class="form-control" value="@Model.IdPelicula" />
+            </div>
+            <div class="form-group">
+                <label asp-for="IdDistribuidor" class="control-label"></label>
+                <input id="IdDistribuidor" class="form-control" value="@Model.IdDistribuidor"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdGenero" class="control-label"></label>
+                <input id="IdGenero" class="form-control" value="@Model.IdGenero" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Titulo" class="control-label"></label>
+                <input id="Titulo" class="form-control" value="@Model.Titulo"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdNacionalidad" class="control-label"></label>
+                <input id="IdNacionalidad" class="form-control" value="@Model.IdNacionalidad"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Argumento" class="control-label"></label>
+                <input id="Argumento" class="form-control" value="@Model.Argumento"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Foto" class="control-label"></label>
+                <input id="Foto" class="form-control" value="@Model.Foto"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaEstreno" class="control-label"></label>
+                <input id="FechaEstreno" class="form-control" value="@Model.FechaEstreno"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Actores" class="control-label"></label>
+                <input id="Actores" class="form-control" value="@Model.Actores" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Duracion" class="control-label"></label>
+                <input id="Duracion" class="form-control" value="@Model.Duracion"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Precio" class="control-label"></label>
+                <input id="Precio" class="form-control" value="@Model.Precio"/>
+            </div>
+            <div class="form-group">
+                <input type="button" value="Save" class="btn btn-primary" id="modificar" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
