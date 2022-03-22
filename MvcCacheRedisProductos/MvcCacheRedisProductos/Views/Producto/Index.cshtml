@@ -1,0 +1,55 @@
+﻿@model List<Producto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Productos Cache Redis</h1>
+
+<a asp-controller="Producto" asp-action="Favoritos" class="btn btn-warning">Productos Favoritos</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               IdProducto
+            </th>
+            <th>
+               Nombre
+            </th>
+            <th>
+                Descripcion
+            </th>
+            <th>
+               Precio
+            </th>
+            <th>
+               Imagen
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdProducto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Imagen)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id=item.IdProducto })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
