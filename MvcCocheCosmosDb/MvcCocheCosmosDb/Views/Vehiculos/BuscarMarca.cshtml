@@ -1,0 +1,60 @@
+﻿@model List<Vehiculo>
+
+@{
+    ViewData["Title"] = "BuscarMarca";
+}
+
+<h1>BuscarMarca</h1>
+
+
+<form method="post">
+    <label>Marca</label>
+    <input type="text" name="marca" />
+
+    <button type="submit" class="btn btn-danger">Buscar Marca</button>
+</form>
+
+@if (Model != null) {
+
+    <table>
+        <thead>
+            <tr>
+                <td class="col-sm-2">
+                    Id
+                </td>
+
+                <td class="col-sm-2">
+                   Marca
+                </td>
+
+                <td class="col-sm-2">
+                   Modelo
+                </td>
+
+                <td class="col-sm-2">
+                   VelocidadMaxima
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Marca)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Modelo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VelocidadMaxima)
+                    </td>
+                   
+                </tr>
+            }
+        </tbody>
+    </table>
+}
