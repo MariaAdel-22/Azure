@@ -74,5 +74,27 @@ namespace MvcCocheCosmosDb.Services
 
             await this.containerCosmos.DeleteItemAsync<Vehiculo>(id, new PartitionKey(id));
         }
+
+        //METODO PARA BUSCAR POR MARCA
+        public async Task<List<Vehiculo>> BuscarVehiculosMarca(string marca) {
+
+            //LAS CONSULTAS NO CONTIENE PARAMETROS, DEBEMOS CONCATENAR
+            string consulta = "select * from c where c.Marca='" + marca + "'";
+
+            //PARA FILTRAR SE UTILIZAN DEFINITIONS
+            QueryDefinition definition = new QueryDefinition(consulta);
+
+            var query = this.containerCosmos.GetItemQueryIterator<Vehiculo>(definition);
+
+            List<Vehiculo> coches = new List<Vehiculo>();
+
+            while (query.HasMoreResults) {
+
+                var response = await query.ReadNextAsync();
+                coches.AddRange(response);
+            }
+
+            return coches;
+        }
     }
 }

@@ -36,6 +36,16 @@
         </dd>
     </dl>
 </div>
+@if (Model.Motor != null) { 
+
+    <ul class="list-group">
+        <li class="list-group-item">Tipo de motor @Model.Motor.Tipo</li>
+        <li class="list-group-item">Cilindrada  @Model.Motor.Cilindrada</li>
+        <li class="list-group-item">Caballos @Model.Motor.Caballos</li>
+        <li class="list-group-item">Turbo @Model.Motor.Turbo</li>
+    </ul>
+}
+
 <div>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     <a asp-action="Index">Back to List</a>

@@ -45,7 +45,7 @@ namespace MvcCocheCosmosDb.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Vehiculo car) {
+        public async Task<IActionResult> Create(Vehiculo car,string existemotor) {
 
             await this.service.AddVehiculoAsync(car);
 
