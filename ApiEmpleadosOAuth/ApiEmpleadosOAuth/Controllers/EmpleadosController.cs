@@ -23,6 +23,32 @@ namespace ApiEmpleadosOAuth.Controllers
             this.repo = repo;
         }
 
+        [HttpDelete("{id}")]
+        [Authorize]
+        public ActionResult<Empleado> EliminarEmpleado(int id) {
+
+            List<Claim> claims = HttpContext.User.Claims.ToList();
+
+            string json = claims.SingleOrDefault(x => x.Type == "UserData").Value;
+
+            Empleado emp = JsonConvert.DeserializeObject<Empleado>(json);
+
+            Empleado emp2 = this.repo.FindEmpleado(emp.IdEmpleado);
+
+            if (emp.Oficio.ToUpper() == "DIRECTOR" || emp.Oficio.ToUpper() == "PRESIDENTE")
+            {
+
+                this.repo.EliminarEmpleado(id);
+
+                return Ok();
+            }
+            else {
+
+                return Problem("Su oficio no es valido para poder eliminar un empleado");
+            }
+        }
+
+
         [HttpGet]
         [Authorize]
         [Route("[action]/{iddirector}")]

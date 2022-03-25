@@ -75,5 +75,10 @@ namespace ApiEmpleadosOAuth.Repositories
             }
 
         }
+
+        public void EliminarEmpleado(int idEmpleado) {
+
+            var consulta = from datos in this.context.Empleados where datos.IdEmpleado == idEmpleado select datos;
+        }
     }
 }
