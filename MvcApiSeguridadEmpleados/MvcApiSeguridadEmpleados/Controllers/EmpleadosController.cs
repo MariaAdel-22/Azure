@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MvcApiSeguridadEmpleados.Filters;
 using MvcApiSeguridadEmpleados.Models;
 using MvcApiSeguridadEmpleados.Services;
 using System;
@@ -18,23 +19,14 @@ namespace MvcApiSeguridadEmpleados.Controllers
             this.service = service;
         }
 
+        [AuthorizeEmpleados]
         public async Task<IActionResult> Empleados()
         {
             string token = HttpContext.Session.GetString("TOKEN");
 
-            if (token == null)
-            {
+            List<Empleado> empleados = await this.service.GetEmpleadosAsync(token);
 
-                ViewData["MENSAJE"] = "No tiene permisos";
-                return View();
-            }
-            else {
-
-                List<Empleado> empleados = await this.service.GetEmpleadosAsync(token);
-
-                return View(empleados);
-            }
-
+            return View(empleados);
         }
 
         public async Task<IActionResult> Details(int id) {

@@ -3,9 +3,11 @@ using ApiEmpleadosOAuth.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ApiEmpleadosOAuth.Controllers
@@ -19,6 +21,22 @@ namespace ApiEmpleadosOAuth.Controllers
         public EmpleadosController(RepositoryEmpleados repo) {
 
             this.repo = repo;
+        }
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult<Empleado> PerfilEmpleado() {
+
+            //AQUI HEMOS RECIBIDO EL TOKEN. CUANDO RECIBIMOS EL TOKEN SE MONTA EL SERVICIO Y ESTAMOS DENTRO DE USER
+            //ESTAMOS RECUPERANDO LOS CLAIMS DEL TOKEN
+            List<Claim> claims = HttpContext.User.Claims.ToList();
+
+            //RECUPERAMOS LA KEY USERDATA QUE ES LA INFORMACION DEL EMPLEADO EN FORMATO JSON
+            string jsonempleado = claims.SingleOrDefault(z => z.Type == "UserData").Value;
+
+            Empleado empleado = JsonConvert.DeserializeObject<Empleado>(jsonempleado);
+
+            return empleado;
         }
 
         [HttpGet]
