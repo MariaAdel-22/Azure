@@ -133,5 +133,32 @@ namespace MvcApiSeguridadEmpleados.Services
 
             return empleado;
         }
+
+        public async Task<Empleado> GetPerfilEmpleado(string token) {
+
+            string request = "/api/empleados/perfilempleado";
+
+            Empleado empleado = await this.CallApiAsync<Empleado>(request,token);
+
+            return empleado;
+        }
+
+        public async Task<List<Empleado>> GetCompis(string token) {
+
+            string request = "/api/empleados/compis";
+
+            List<Empleado> empleados = await this.CallApiAsync<List<Empleado>>(request, token);
+
+            return empleados;
+        }
+
+        public async Task<List<Empleado>> GetSubordinados(string token) {
+
+            string request = "/api/empleados/subordinados";
+
+            List<Empleado> empleados = await this.CallApiAsync<List<Empleado>>(request, token);
+
+            return empleados;
+        }
     }
 }

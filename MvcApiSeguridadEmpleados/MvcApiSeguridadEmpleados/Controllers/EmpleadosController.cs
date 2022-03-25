@@ -22,9 +22,39 @@ namespace MvcApiSeguridadEmpleados.Controllers
         [AuthorizeEmpleados]
         public async Task<IActionResult> Empleados()
         {
-            string token = HttpContext.Session.GetString("TOKEN");
+            string token = HttpContext.User.FindFirst("TOKEN").Value;
 
             List<Empleado> empleados = await this.service.GetEmpleadosAsync(token);
+
+            return View(empleados);
+        }
+
+        [AuthorizeEmpleados]
+        public async Task<IActionResult> Perfil() {
+
+            string token = HttpContext.User.FindFirst("TOKEN").Value;
+
+            Empleado emp = await this.service.GetPerfilEmpleado(token);
+
+            return View(emp);
+        }
+
+        [AuthorizeEmpleados]
+        public async Task<IActionResult> Compis() {
+
+            string token = HttpContext.User.FindFirst("TOKEN").Value;
+
+            List<Empleado> compis = await this.service.GetCompis(token);
+
+            return View(compis);
+        }
+
+        [AuthorizeEmpleados]
+        public async Task<IActionResult> Subordinados() {
+
+            string token = HttpContext.User.FindFirst("TOKEN").Value;
+
+            List<Empleado> empleados = await this.service.GetSubordinados(token);
 
             return View(empleados);
         }

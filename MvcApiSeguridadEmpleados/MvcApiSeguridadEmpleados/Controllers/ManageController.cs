@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MvcApiSeguridadEmpleados.Models;
 using MvcApiSeguridadEmpleados.Services;
 using System;
 using System.Collections.Generic;
@@ -38,16 +39,19 @@ namespace MvcApiSeguridadEmpleados.Controllers
                 return View();
             }
             else {
-
+                //UNA VEZ QUE TENEMOS EL TOKEN RECUPERAMOS EL PERFIL DEL EMPLEADO Y ALMACENAMOS LOS DATOS DE FORMA PERSONALIZADA
                 ViewData["MENSAJE"] = "Bienvenid@";
-                ViewData["TOKEN"] = token;
-                HttpContext.Session.SetString("TOKEN", token);
+
+                Empleado empleado = await this.service.GetPerfilEmpleado(token);
 
                 ClaimsIdentity identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme,
                     ClaimTypes.Name, ClaimTypes.Role);
 
-                identity.AddClaim(new Claim(ClaimTypes.Name, username));
-                identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, password.ToString()));
+                identity.AddClaim(new Claim(ClaimTypes.Name,empleado.Apellido));
+                identity.AddClaim(new Claim(ClaimTypes.NameIdentifier,empleado.IdEmpleado.ToString()));
+                identity.AddClaim(new Claim(ClaimTypes.Role, empleado.Oficio));
+
+                identity.AddClaim(new Claim("TOKEN",token));
 
                 ClaimsPrincipal principal = new ClaimsPrincipal(identity);
 

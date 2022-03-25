@@ -2,12 +2,21 @@
 {
 
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Manage" asp-action="LogOut"><span style="color:red">@Context.User.Identity.Name</span></a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="Manage" asp-action="LogOut">
+        <span style="color:red">@Context.User.Identity.Name</span></a>
     </li>
     <li class="nav-item">
         <a class="nav-link text-dark" asp-area="" asp-controller="Empleados" asp-action="Empleados">Cargar Empleados</a>
     </li>
-
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Empleados" asp-action="Perfil">Perfil</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Empleados" asp-action="Compis">Compis</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Empleados" asp-action="Subordinados">Subordinados</a>
+    </li>
 }
 else
 {

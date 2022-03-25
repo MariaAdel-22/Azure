@@ -25,6 +25,39 @@ namespace ApiEmpleadosOAuth.Controllers
 
         [HttpGet]
         [Authorize]
+        [Route("[action]/{iddirector}")]
+        public ActionResult<List<Empleado>> Subordinados(int iddirector) {
+
+            List<Claim> claims = HttpContext.User.Claims.ToList();
+
+            string json = claims.SingleOrDefault(x => x.Type == "UserData").Value;
+
+            Empleado empleado = JsonConvert.DeserializeObject<Empleado>(json);
+            List<Empleado> subordinados = this.repo.GetSubordinados(empleado.IdEmpleado);
+
+            return subordinados;
+        }
+
+        [HttpGet]
+        [Authorize]
+        [Route("[action]")]
+        public ActionResult<List<Empleado>> Compis() {
+
+            List<Claim> claims = HttpContext.User.Claims.ToList();
+
+            string json = claims.SingleOrDefault(z => z.Type == "UserData").Value;
+
+            Empleado emp = JsonConvert.DeserializeObject<Empleado>(json);
+
+            List<Empleado> empleados = this.repo.GetCompisCurro(emp.IdDepartamento);
+
+            return empleados;
+        }
+
+
+        [HttpGet]
+        [Authorize]
+        [Route("[action]")]
         public ActionResult<Empleado> PerfilEmpleado() {
 
             //AQUI HEMOS RECIBIDO EL TOKEN. CUANDO RECIBIMOS EL TOKEN SE MONTA EL SERVICIO Y ESTAMOS DENTRO DE USER
