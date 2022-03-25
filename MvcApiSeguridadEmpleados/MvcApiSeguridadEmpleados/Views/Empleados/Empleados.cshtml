@@ -1,0 +1,72 @@
+﻿@model List<Empleado>
+
+@{
+    ViewData["Title"] = "Empleados";
+}
+
+<h1>Empleados</h1>
+
+<h2 style="color:red">
+    @ViewData["MENSAJE"]
+</h2>
+
+@if (Model != null) {
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                IdEmpleado
+            </th>
+            <th>
+               Apellido
+            </th>
+            <th>
+              Oficio
+            </th>
+            <th>
+               Director
+            </th>
+            <th>
+               Salario
+            </th>
+            <th>
+               IdDepartamento
+            </th>
+            <th>
+                Detalles
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdEmpleado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Apellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Oficio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Director)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Salario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdDepartamento)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id=item.IdEmpleado }) |
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+}
+        
