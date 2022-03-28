@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewData["Title"] = "SendMail";
+}
+
+<h1>Send Mail Azure Power Automate</h1>
+
+<form method="post">
+    <label>Email:</label>
+    <input type="text" name="email" class="form-control" />
+    <br />
+
+    <label>Subject:</label>
+    <input type="text" name="subject" class="form-control" />
+    <br />
+
+    <label>Body:</label>
+    <textarea name="body" class="form-control"></textarea>
+    <br/>
+
+    <button type="submit" class="btn btn-info">Send Email</button>
+</form>
+
+<h1 style="color:red">@ViewData["MENSAJE"]</h1>
+
