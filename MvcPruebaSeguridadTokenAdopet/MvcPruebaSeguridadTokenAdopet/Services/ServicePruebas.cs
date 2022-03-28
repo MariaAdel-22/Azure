@@ -131,7 +131,7 @@ namespace MvcPruebaSeguridadTokenAdopet.Services
         public async Task<VistaCuentas> GetCuentaAsync(string token)
         {
 
-            string request = "/api/Inicio/BuscarCuenta";
+            string request = "/api/inicio/buscarcuenta";
 
            VistaCuentas cuenta = await this.CallApiAsync<VistaCuentas>(request, token);
 
