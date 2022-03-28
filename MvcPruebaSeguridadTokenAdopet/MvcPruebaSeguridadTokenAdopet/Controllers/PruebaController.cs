@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
+using MvcPruebaSeguridadTokenAdopet.Filters;
 using MvcPruebaSeguridadTokenAdopet.Services;
 using NuGetAdoPet.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace MvcPruebaSeguridadTokenAdopet.Controllers
@@ -41,11 +45,33 @@ namespace MvcPruebaSeguridadTokenAdopet.Controllers
                 //UNA VEZ QUE TENEMOS EL TOKEN RECUPERAMOS EL PERFIL DEL EMPLEADO Y ALMACENAMOS LOS DATOS DE FORMA PERSONALIZADA
                 ViewData["MENSAJE"] = "Bienvenid@";
 
-                VistaCuentas cuenta = await this.service.GetCuentaAsync(token);
+                ClaimsIdentity identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme,
+                   ClaimTypes.Name, ClaimTypes.Role);
 
-                return View(cuenta);
-                //return RedirectToAction("Index", "Home");
+                identity.AddClaim(new Claim("TOKEN", token));
+
+                ClaimsPrincipal principal = new ClaimsPrincipal(identity);
+
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal,
+                    new AuthenticationProperties
+                    {
+                        IsPersistent = true,
+                        ExpiresUtc = DateTime.UtcNow.AddMinutes(36)
+                    });
+
+                //return View(cuenta);
+                return RedirectToAction("Perfil");
             }
+        }
+
+        [AuthorizeCuentas]
+        public async Task<IActionResult> Perfil() {
+
+            string token = HttpContext.User.FindFirst("TOKEN").Value;
+
+            VistaCuentas cuenta = await this.service.GetCuentaAsync(token);
+
+            return View(cuenta);
         }
     }
 }
