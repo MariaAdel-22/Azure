@@ -79,5 +79,10 @@ namespace MvcLogicApps.Services
                 }
             }
         }
+
+        public async Task<List<Tabla>> TablaMultiplicarAsync(int numero) { 
+        
+
+        }
     }
 }
