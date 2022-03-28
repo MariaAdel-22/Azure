@@ -31,5 +31,20 @@ namespace MvcLogicApps.Controllers
 
             return View();
         }
+
+        public IActionResult SumarNumeros() {
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SumarNumeros(int numero1, int numero2) {
+
+            string respuesta = await this.service.SumarNumerosAsync(numero1, numero2);
+
+            ViewData["MENSAJE"] = respuesta;
+
+            return View();
+        }
     }
 }
