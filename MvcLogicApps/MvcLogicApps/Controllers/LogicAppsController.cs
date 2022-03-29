@@ -82,5 +82,12 @@ namespace MvcLogicApps.Controllers
 
             return View(doctores);
         }
+
+        public async Task<IActionResult> DetailsDoctor(string iddoctor) {
+
+            Doctor doctor = await this.service.FindDoctorAsync(iddoctor);
+
+            return View(doctor);
+        }
     }
 }

@@ -158,5 +158,36 @@ namespace MvcLogicApps.Services
 
             }
         }
+
+        public async Task<Doctor> FindDoctorAsync(string idDoctor) {
+
+            string urlFlowDetail = "https://prod-14.westeurope.logic.azure.com:443/workflows/a9c87cb3ab574e9faf843e7225caf47c/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=VyxgyYRzyMfzowRIVuLlFL0LHUrQz3aDRmauHHx90wE";
+
+            using (HttpClient client = new HttpClient()) {
+
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(this.Header);
+
+                var modelId = new { IdDoctor = idDoctor };
+
+                string json = JsonConvert.SerializeObject(modelId);
+
+                StringContent content = new StringContent(json,Encoding.UTF8,"application/json");
+
+                HttpResponseMessage response = await client.PostAsync(urlFlowDetail, content);
+
+                if (response.IsSuccessStatusCode)
+                {
+
+                    Doctor doctor = await response.Content.ReadAsAsync<Doctor>();
+
+                    return doctor;
+                }
+                else {
+
+                    return null;
+                }
+            }
+        }
     }
 }
