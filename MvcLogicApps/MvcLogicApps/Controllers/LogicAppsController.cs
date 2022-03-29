@@ -89,5 +89,21 @@ namespace MvcLogicApps.Controllers
 
             return View(doctor);
         }
+
+        public IActionResult AnalizarComentario()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AnalizarComentario(string comentario) {
+
+            string respuesta = await this.service.AnalizarComentariosAsync(comentario);
+
+            ViewData["RESPUESTA"] = respuesta;
+
+            return View();
+        }
     }
 }

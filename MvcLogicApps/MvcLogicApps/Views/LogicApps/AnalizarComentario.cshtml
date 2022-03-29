@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewData["Title"] = "AnalizarComentario";
+}
+
+<h1>Analizar Comentario</h1>
+
+<form method="post">
+    <label>Introduce tu valoracion de Logic Apps</label>
+    <textarea name="comentario" class="form-control"></textarea>
+
+    <button type="submit" class="btn btn-danger">Valorar Logic Apps</button>
+</form>
+
+<h1 style="color:red">
+    @ViewData["RESPUESTA"]
+</h1>

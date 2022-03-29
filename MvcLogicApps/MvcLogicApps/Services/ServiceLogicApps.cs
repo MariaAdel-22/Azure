@@ -189,5 +189,36 @@ namespace MvcLogicApps.Services
                 }
             }
         }
+
+        public async Task<string> AnalizarComentariosAsync(string comentario) {
+
+            string UrlFlowSentimientos = "https://prod-115.westeurope.logic.azure.com:443/workflows/0fd4b6f3545446ffa811720b1780c7ac/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=ve-zoifU0960MKmQBcya3I-X9Szrgp_fM3Dx4CDf_kw";
+
+            using (HttpClient client= new HttpClient()) {
+
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(this.Header);
+
+                var modelComentario = new { Comentario = comentario };
+
+                string json = JsonConvert.SerializeObject(modelComentario);
+
+                StringContent content = new StringContent(json, Encoding.UTF8,"application/json");
+
+                HttpResponseMessage response = await client.PostAsync(UrlFlowSentimientos, content);
+
+                if (response.IsSuccessStatusCode)
+                {
+
+                    string data = await response.Content.ReadAsStringAsync();
+
+                    return data;
+                }
+                else {
+
+                    return "Algo está fallando...";
+                }
+            }
+        }
     }
 }
