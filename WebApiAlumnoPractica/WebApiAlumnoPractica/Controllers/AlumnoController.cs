@@ -70,7 +70,7 @@ namespace WebApiAlumnoPractica.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpPost]
         [Authorize]
         [Route("[action]")]
         public ActionResult InsertarAlumno(Alumno al) {
@@ -147,20 +147,14 @@ namespace WebApiAlumnoPractica.Controllers
 
         [HttpGet]
         [Authorize]
-        [Route("[action]")]
-        public ActionResult<Alumno> GetPerfil() {
+        [Route("[action]/{id}")]
+        public ActionResult<Alumno> Detalles(int id) {
 
-            List<Claim> claims = HttpContext.User.Claims.ToList();
-
-            string jsonAlumno = claims.SingleOrDefault(z => z.Type == "UserData").Value;
-
-            Alumno alumno = JsonConvert.DeserializeObject<Alumno>(jsonAlumno);
-
-            return alumno;
+            return this.repo.FinIdAlumno(id);
         }
 
 
-        [HttpPost]
+        [HttpGet]
         [Authorize]
         public ActionResult<List<Alumno>> GetAlumnos()
         {

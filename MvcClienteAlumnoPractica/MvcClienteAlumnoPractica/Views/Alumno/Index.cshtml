@@ -1,0 +1,58 @@
+﻿@model List<Alumno>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Insertar">Insertar Alumno</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                idAlumno
+            </th>
+            <th>
+               Curso
+            </th>
+            <th>
+               Nombre
+            </th>
+            <th>
+                Apellidos
+            </th>
+            <th>
+                Nota
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.idAlumno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Curso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apellidos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nota)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Detalles", new { id=item.idAlumno }) 
+                @Html.ActionLink("Delete", "Delete", new { id=item.idAlumno})
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

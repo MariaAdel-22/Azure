@@ -80,7 +80,12 @@ namespace WebApiAlumnoPractica.Repositories
 
             Alumno al = this.FinIdAlumno(idAlumno);
 
-            this.context.Alumnos.Remove(al);
+            if (al != null) {
+
+                this.context.Alumnos.Remove(al);
+                this.context.SaveChanges();
+            }
+            
         }
     }
 }
