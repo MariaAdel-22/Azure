@@ -113,5 +113,50 @@ namespace MvcLogicApps.Services
             }
 
         }
+
+        public async Task InsertarDoctorAsync(Doctor doctor) {
+
+            string urlFlowInsert = "https://prod-171.westeurope.logic.azure.com:443/workflows/07c75c0afdb146aa8e120d1e04d4c44b/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=G2QL93ar2AjRWQY0DTg8pdFKwSZVaxkn29qw0ACu7uc";
+
+            using (HttpClient client = new HttpClient()) {
+
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(this.Header);
+
+                string json = JsonConvert.SerializeObject(doctor);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await client.PostAsync(urlFlowInsert, content);
+
+            }
+        
+        }
+
+        public async Task<List<Doctor>> GetDoctoresAsync() {
+
+            string UrlFlowDoctores = "https://prod-152.westeurope.logic.azure.com:443/workflows/b4bd14bc44434f1ead68f1903382a8a4/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=f1SVOAfupERTsQv2bv3kub_3MeqROb7FnTkwICbC4LI";
+
+            using (HttpClient client = new HttpClient())
+            {
+
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(this.Header);
+
+                HttpResponseMessage response = await client.PostAsync(UrlFlowDoctores, null);
+
+                if (response.IsSuccessStatusCode)
+                {
+
+                    List<Doctor> doctores = await response.Content.ReadAsAsync<List<Doctor>>();
+
+                    return doctores;
+                }
+                else {
+
+                    return null;
+                }
+
+            }
+        }
     }
 }
