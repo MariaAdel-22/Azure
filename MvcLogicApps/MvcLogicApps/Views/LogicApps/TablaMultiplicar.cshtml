@@ -1,0 +1,31 @@
+﻿@model List<Tabla>
+
+@{
+    ViewData["Title"] = "TablaMultiplicar";
+}
+
+<h1>Tabla Multiplicar</h1>
+
+<form method="post">
+
+    <label>Introduzca un número:</label>
+    <input type="text" name="numero" class="form-control" />
+    <br/>
+
+    <button type="submit" class="btn btn-info">Tabla Multiplicar</button>
+</form>
+
+<hr/>
+
+@if (Model != null) { 
+
+    <ul class="list-group">
+
+        @foreach(Tabla t in Model){
+        
+            <li class="list-group-item">
+                @t.Resultado
+            </li>
+        }
+    </ul>
+}
