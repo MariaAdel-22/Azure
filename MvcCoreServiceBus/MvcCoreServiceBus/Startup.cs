@@ -27,9 +27,9 @@ namespace MvcCoreServiceBus
         {
             string keybus = this.Configuration.GetConnectionString("ServiceBusKey");
 
-            ServiceBusClient service = new ServiceBusClient(keybus);
-            services.AddTransient<ServiceBusClient>(x => service);
-            services.AddTransient<ServiceQueueBus>();
+            ServiceQueueBus service = new ServiceQueueBus(keybus);
+            services.AddTransient<ServiceQueueBus>(x => service);
+
             services.AddControllersWithViews();
         }
 

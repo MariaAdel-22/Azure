@@ -13,9 +13,9 @@ namespace MvcCoreServiceBus.Services
         private ServiceBusClient client;
         private List<string> mensajes;
 
-        public ServiceQueueBus(ServiceBusClient client) {
-
-            this.client = client;
+        public ServiceQueueBus(string key)
+        {
+            this.client = new ServiceBusClient(key);
             this.mensajes = new List<string>();
         }
 
