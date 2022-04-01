@@ -6,31 +6,31 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Http;
 
-namespace MvcPruebaSeguridadTokenAdopet.Filters
+
+namespace ValidarInicioSesionToken.Filters
 {
-    public class AuthorizeCuentasAttribute : AuthorizeAttribute, IAuthorizationFilter
+
+    public class AuthorizeAlumnoAttribute : AuthorizeAttribute
+    ,IAuthorizationFilter
     {
         public void OnAuthorization(AuthorizationFilterContext context)
         {
             var user = context.HttpContext.User;
-
             if (user.Identity.IsAuthenticated == false)
             {
-
-                RouteValueDictionary routeLogin = new RouteValueDictionary(new
-                {
-
-                    controller = "Home",
-                    action = "Index"
-                });
-
-                RedirectToRouteResult result = new RedirectToRouteResult(routeLogin);
-
+                RouteValueDictionary routeLogin =
+                    new RouteValueDictionary(new
+                    {
+                        controller = "Alumno",
+                        action = "LogIn"
+                    });
+                RedirectToRouteResult result =
+                    new RedirectToRouteResult(routeLogin);
                 context.Result = result;
-
             }
-
         }
     }
+
 }

@@ -1,0 +1,24 @@
+﻿@model VistaCuentas
+
+
+@if(Model != null){
+
+<table class="table table-info">
+    <thead>
+        <tr>
+            <th>IdCuenta</th>
+            <th>Tipo Cuenta</th>
+            <th>Nombre</th>
+            <th>Psswd</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.CodigoCuenta</td>
+            <td>@Model.TipoCuenta</td>
+            <td>@Model.Nombre</td>
+            <td>@Model.Password</td>
+        </tr>
+    </tbody>
+</table>
+}

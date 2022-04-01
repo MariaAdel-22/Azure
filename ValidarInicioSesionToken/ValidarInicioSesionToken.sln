@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31911.196
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcPruebaSeguridadTokenAdopet", "MvcPruebaSeguridadTokenAdopet\MvcPruebaSeguridadTokenAdopet.csproj", "{D29E688C-7997-4DB1-AB19-D0D72536EDCC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValidarInicioSesionToken", "ValidarInicioSesionToken\ValidarInicioSesionToken.csproj", "{6F64DED3-8235-4748-89A9-80B8795E52D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D29E688C-7997-4DB1-AB19-D0D72536EDCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D29E688C-7997-4DB1-AB19-D0D72536EDCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D29E688C-7997-4DB1-AB19-D0D72536EDCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D29E688C-7997-4DB1-AB19-D0D72536EDCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F64DED3-8235-4748-89A9-80B8795E52D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F64DED3-8235-4748-89A9-80B8795E52D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F64DED3-8235-4748-89A9-80B8795E52D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F64DED3-8235-4748-89A9-80B8795E52D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {7667A677-6A4F-471C-B160-C8E3F3AF4031}
+		SolutionGuid = {E5563F4B-63A1-460E-A086-0A4ABAC4AF90}
 	EndGlobalSection
 EndGlobal

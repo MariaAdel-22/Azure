@@ -5,13 +5,13 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MvcPruebaSeguridadTokenAdopet.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ValidarInicioSesionToken.Services;
 
-namespace MvcPruebaSeguridadTokenAdopet
+namespace ValidarInicioSesionToken
 {
     public class Startup
     {
@@ -25,11 +25,11 @@ namespace MvcPruebaSeguridadTokenAdopet
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            string urlApi = this.Configuration.GetValue<string>("ApiUrl:cadenaazure");
 
-            string urlApi = this.Configuration.GetValue<string>("ApiAzure:cadenaapi");
+            ServiceAlumno serviceApi = new ServiceAlumno(urlApi);
 
-            ServicePruebas service = new ServicePruebas(urlApi);
-            services.AddTransient<ServicePruebas>(x => service);
+            services.AddTransient<ServiceAlumno>(x => serviceApi);
 
             services.AddDistributedMemoryCache();
             services.AddSession(options =>
@@ -40,12 +40,15 @@ namespace MvcPruebaSeguridadTokenAdopet
 
             services.AddAuthentication(options =>
             {
-                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultAuthenticateScheme =
+                CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultSignInScheme =
+                CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme =
+                CookieAuthenticationDefaults.AuthenticationScheme;
             }).AddCookie();
 
-            services.AddControllersWithViews(op => op.EnableEndpointRouting = false);
+            services.AddControllersWithViews(options => options.EnableEndpointRouting = false);
 
         }
 
@@ -66,14 +69,15 @@ namespace MvcPruebaSeguridadTokenAdopet
             app.UseStaticFiles();
 
             app.UseRouting();
+
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseMvc(routes =>
+            app.UseMvc(route =>
             {
-                routes.MapRoute(
+                route.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Alumno}/{action=LogIn}/{id?}");
             });
         }
     }
