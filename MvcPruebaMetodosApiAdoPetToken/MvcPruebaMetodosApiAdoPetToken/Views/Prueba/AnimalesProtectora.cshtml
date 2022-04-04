@@ -1,0 +1,29 @@
+﻿@model List<Animal> 
+
+@{
+    ViewData["Title"] = "AnimalesProtectora";
+}
+
+<h1>Animales Protectora</h1>
+
+<a asp-controller="Prueba" asp-action="InsertarAnimal" class="btn btn-info">Insertar Animal</a>
+<table class="table table-active">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Especie</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Animal an in Model)
+        {
+
+            <tr>
+                <td>@an.Nombre</td>
+                <td>@an.Especie</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

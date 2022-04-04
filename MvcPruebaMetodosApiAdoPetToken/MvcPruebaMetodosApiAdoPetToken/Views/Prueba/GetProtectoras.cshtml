@@ -1,0 +1,26 @@
+﻿@model List<Protectora>
+
+@{
+    ViewData["Title"] = "GetProtectoras";
+}
+
+<h1>Get Protectoras</h1>
+
+<table class="table table-active">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Id Protectora</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(Protectora pro in Model){
+        
+            <tr>
+                <td>@pro.Nombre</td>
+                <td>@pro.IdProtectora</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
